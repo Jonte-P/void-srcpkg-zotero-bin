@@ -6,7 +6,7 @@ archs="x86_64"
 wrksrc="Zotero_linux-x86_64"
 
 distfiles="https://download.zotero.org/client/release/${version}/Zotero-${version}_linux-x86_64.tar.bz2"
-checksum=SKIP
+checksum=b95d11d0bf04a19b79f6130a5c5949f8484e340acfa516dbfed215fb064a2e06
 
 short_desc="Zotero reference manager (official upstream binary)"
 maintainer="yourname <you@example.invalid>"
