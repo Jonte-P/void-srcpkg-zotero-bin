@@ -1,0 +1,7 @@
+#!/bin/sh
+# Scrape Zotero download page for the Linux version string.
+# Requires: curl, sed, head
+curl -fsSL "https://www.zotero.org/download/" \
+  | sed -n 's/.*client\/release\/\([0-9][0-9.]*\)\/Zotero-.*/\1/p' \
+  | head -n 1
+
