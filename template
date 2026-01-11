@@ -1,0 +1,46 @@
+# Template file for 'zotero-bin'
+pkgname=zotero-bin
+version=7.0.30
+revision=1
+archs="x86_64"
+wrksrc="Zotero_linux-x86_64"
+
+distfiles="https://download.zotero.org/client/release/${version}/Zotero-${version}_linux-x86_64.tar.bz2"
+checksum=SKIP
+
+short_desc="Zotero reference manager (official upstream binary)"
+maintainer="yourname <you@example.invalid>"
+license="AGPL-3.0-or-later"
+homepage="https://www.zotero.org/"
+nostrip=yes
+
+do_install() {
+	# Install into /opt as recommended by upstream
+	vmkdir opt
+	vcopy "${wrksrc}" "opt/zotero"
+
+	# Command in PATH
+	vmkdir usr/bin
+	ln -sf /opt/zotero/zotero "${DESTDIR}/usr/bin/zotero"
+
+	# Desktop entry
+	vmkdir usr/share/applications
+	cat > "${DESTDIR}/usr/share/applications/zotero.desktop" <<'EOF'
+[Desktop Entry]
+Type=Application
+Name=Zotero
+Comment=Reference management
+Exec=/opt/zotero/zotero %u
+Terminal=false
+Categories=Office;Education;Science;
+StartupWMClass=Zotero
+MimeType=x-scheme-handler/zotero;
+EOF
+
+	# Icon (path has been stable for years, but check on version bumps)
+	vmkdir usr/share/icons/hicolor/128x128/apps
+	if [ -f "${DESTDIR}/opt/zotero/chrome/icons/default/default128.png" ]; then
+		ln -sf /opt/zotero/chrome/icons/default/default128.png \
+			"${DESTDIR}/usr/share/icons/hicolor/128x128/apps/zotero.png"
+	fi
+}
