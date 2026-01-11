@@ -34,7 +34,8 @@ Exec=/opt/zotero/zotero %u
 Terminal=false
 Categories=Office;Education;Science;
 StartupWMClass=Zotero
-MimeType=x-scheme-handler/zotero;
+Icon=zotero
+MimeType=x-scheme-handler/zotero;application/x-bibtex;text/x-bibtex;application/x-research-info-systems;
 EOF
 
 	# Icon (path has been stable for years, but check on version bumps)
